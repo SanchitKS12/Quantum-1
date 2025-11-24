@@ -1,37 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Quantum Shield</title>
-  <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-
-<h1>🛡 Quantum Shield</h1>
-<p>AI + Quantum Malware Detection</p>
-
-<form method="post" action="/scan/manual">
-  <h2>Manual Scan</h2>
-  <input type="number" name="f1" step="any" placeholder="File Operations Rate" required>
-  <input type="number" name="f2" step="any" placeholder="Failed Access Ratio" required>
-  <input type="number" name="f3" step="any" placeholder="New Processes Created" required>
-  <input type="number" name="f4" step="any" placeholder="Network Connections Count" required>
-  <input type="number" name="f5" step="any" placeholder="Unusual File Types" required>
-  <input type="number" name="f6" step="any" placeholder="Entropy Change" required>
-  <button>Scan</button>
-</form>
-
 {% if manual_result %}
   <div class="result">
     <strong>Status:</strong> {{ manual_result.action }} <br>
     <strong>Risk:</strong> {{ manual_result.prob }}%
   </div>
 {% endif %}
-
-<form method="post" action="/scan/file" enctype="multipart/form-data">
-  <h2>Upload CSV Log</h2>
-  <input type="file" name="file" accept=".csv">
-  <button>Scan CSV</button>
-</form>
 
 {% if file_result %}
   <div class="result">
@@ -40,18 +12,9 @@
   </div>
 {% endif %}
 
-<form method="post" action="/scan/url">
-  <h2>Scan from URL</h2>
-  <input type="url" name="url" placeholder="https://example.com/logs.csv">
-  <button>Scan URL</button>
-</form>
-
 {% if url_result %}
   <div class="result">
     Rows: {{ url_result.rows }} <br>
     First status: {{ url_result.first_action }} ({{ url_result.first_prob }}%)
   </div>
 {% endif %}
-
-</body>
-</html>
